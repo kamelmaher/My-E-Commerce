@@ -6,7 +6,10 @@ import img4 from "/banner3_4.png"
 const imgs = [img1, img2, img3, img4]
 const HeroImages = () => {
     return (
-        <Stack direction={"row"} flexWrap={"wrap"} justifyContent={"space-between"} mt={2} mb={2} gap={2}>
+        <Stack direction={"row"} flexWrap={"wrap"} justifyContent={{
+            xs: "center",
+            md: "space-between"
+        }} mt={2} mb={2} gap={2}>
             {imgs.map(img => <Stack
                 key={img}
                 direction={"row"}
