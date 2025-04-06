@@ -13,7 +13,6 @@ const NavBar = () => {
                     {page}
                 </Typography>)
             }
-
         </Stack>
     )
 }

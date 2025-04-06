@@ -4,11 +4,12 @@ type MyButtonProps = {
     leftIcon?: ReactNode,
     text?: string,
     rightIcon?: ReactNode,
-    size: "small" | "medium"
+    size: "small" | "medium",
+    handleClick?: () => void
 }
-const MyButton = ({ leftIcon, text, rightIcon, size }: MyButtonProps) => {
+const MyButton = ({ leftIcon, text, rightIcon, size, handleClick }: MyButtonProps) => {
     return (
-        <Button className="my-button" size={size}>
+        <Button className="my-button" size={size} onClick={handleClick}>
             <span>
                 {leftIcon && leftIcon}
             </span>

@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material"
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from "react";
 import { pages } from "../../data/pages";
+import Menu from "../Menu";
 const HiddenMenu = () => {
     const [showMenu, setShowMenu] = useState(false)
     return (
@@ -19,26 +20,17 @@ const HiddenMenu = () => {
             >
                 <MenuIcon />
             </Box>
-            {
-                showMenu &&
-                <Box
-                    position={"absolute"}
-                    boxShadow={"0 2px 8px rgba(0, 0, 0, 0.08)"}
-                    zIndex={15122}
-                    bgcolor={"white"}
-                    borderRadius={4}
-                >
-                    {
-                        pages.map(page => <Typography
-                            padding={"0 10px"}
-                            mb={2}
-                            key={page}
-                            variant="h6"
-                        >{page}</Typography>)
-                    }
-                </Box>
-            }
-        </Box>
+            <Menu show={showMenu} maxHeight="210px" >
+                {
+                    pages.map(page => <Typography
+                        key={page}
+                        variant="h6"
+                        padding={"5px 10px"}
+                        onClick={() => setShowMenu(false)}
+                    >{page}</Typography>)
+                }
+            </Menu>
+        </Box >
     )
 }
 
