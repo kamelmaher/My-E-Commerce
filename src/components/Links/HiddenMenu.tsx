@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material"
+import { Box } from "@mui/material"
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from "react";
 import { pages } from "../../data/pages";
@@ -20,14 +20,15 @@ const HiddenMenu = () => {
             >
                 <MenuIcon />
             </Box>
-            <Menu show={showMenu} maxHeight="210px" >
+            <Menu show={showMenu} maxHeight="180px" >
                 {
-                    pages.map(page => <Typography
+                    pages.map(page => <p
                         key={page}
-                        variant="h6"
-                        padding={"5px 10px"}
+                        style={{
+                            padding: "5px 10px"
+                        }}
                         onClick={() => setShowMenu(false)}
-                    >{page}</Typography>)
+                    >{page}</p>)
                 }
             </Menu>
         </Box >

@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material"
+import { Box } from "@mui/material"
 import { categories } from "../../data/Categories"
 import Menu from "../Menu"
 type CategoriesMenuProps = {
@@ -7,16 +7,15 @@ type CategoriesMenuProps = {
 }
 const CategoriesMenu = ({ showMenu, closeMenu }: CategoriesMenuProps) => {
     return (
-        <Menu w="100%" show={showMenu}>
+        <Menu w="100%" show={showMenu} maxHeight="250px">
             {
-                categories.map(category => <Typography
+                categories.map(category => <Box
                     key={category}
-                    variant="h6"
                     borderBottom={"1px solid var(--border-color)"}
                     padding={"5px 10px"}
                     className="pointer"
                     onClick={closeMenu}
-                >{category}</Typography>)
+                >{category}</Box>)
             }
         </Menu>
     )
