@@ -21,7 +21,7 @@ const HeroImages = () => {
                     lg: "calc(100% / 4 - 20px)"
                 }}
             >
-                <img src={img} alt="banner img" style={{ width: "100px " }} />
+                <img src={img} alt="banner img" style={{ width: "100px " }} loading="lazy" />
                 <Box>
                     <p style={{ fontWeight: "700" }}>Break Disc deals on this</p>
                     <p style={{ color: "grey" }}>Up to <span style={{ color: "var(--primary)", fontSize: "25px" }}>70%</span></p>

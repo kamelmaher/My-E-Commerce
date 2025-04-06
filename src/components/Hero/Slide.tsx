@@ -3,7 +3,7 @@ type SlideProps = {
 }
 const Slide = ({ img }: SlideProps) => {
     return (
-        <img src={img} alt="banner-product-img" loading="lazy" />
+        <img src={img} alt="banner-product-img" />
     )
 }
 
