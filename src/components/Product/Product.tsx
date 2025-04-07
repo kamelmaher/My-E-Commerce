@@ -11,28 +11,29 @@ type ProductProps = {
 }
 const Product = ({ product }: ProductProps) => {
     return (
-        <Box
-            boxShadow={"0 2px 8px rgba(0, 0, 0, 0.08)"}
-            border={"1px solid var(--border-color)"}
-            padding={"13px"}
-            width={{
-                xs: "100%",
-                sm: "calc(100% / 2 - 10px)",
-                md: "calc(100% / 3 - 10px)",
-                lg: "calc(100% / 5 - 10px)"
-            }}
-            mb={2}
-            position={"relative"}
-        >
+        <Box width={{
+            xs: "100%",
+            sm: "calc(100% / 2 - 10px)",
+            md: "calc(100% / 3 - 10px)",
+            lg: "calc(100% / 5 - 10px)"
+        }}>
             <Animated>
-                <ProductImg img={product.img} name={product.name} />
-                <ProductRating rating={product.rating} />
-                <ProductsDetails name={product.name} price={product.price} old_price={product.old_price} />
-                <ProductControls />
-                {
-                    product.old_price &&
-                    <Discount price={product.price} old_price={product.old_price} />
-                }
+                <Box
+                    boxShadow={"0 2px 8px rgba(0, 0, 0, 0.08)"}
+                    border={"1px solid var(--border-color)"}
+                    padding={"13px"}
+                    mb={2}
+                    position={"relative"}
+                >
+                    <ProductImg img={product.img} name={product.name} />
+                    <ProductRating rating={product.rating} />
+                    <ProductsDetails name={product.name} price={product.price} old_price={product.old_price} />
+                    <ProductControls />
+                    {
+                        product.old_price &&
+                        <Discount price={product.price} old_price={product.old_price} />
+                    }
+                </Box>
             </Animated>
         </Box>
     )

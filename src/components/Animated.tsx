@@ -11,7 +11,7 @@ const Animated = ({ children }: AnimatedProps) => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
             viewport={{ once: true }}
-            style={{width: "100%" , height: "100%"}}
+            style={{ width: "100%", height: "100%" }}
         >
             {children}
         </motion.div>
