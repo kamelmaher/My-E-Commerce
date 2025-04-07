@@ -14,7 +14,7 @@ const Menu = ({ children, w, show, maxHeight }: MenuProps) => {
             <Box
                 position={"absolute"}
                 boxShadow={"0 2px 8px rgba(0, 0, 0, 0.08)"}
-                zIndex={15122}
+                zIndex={1542}
                 bgcolor={"white"}
                 width={w}
                 height={show ? maxHeight ? maxHeight : "300px" : "0"}

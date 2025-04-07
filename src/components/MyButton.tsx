@@ -6,10 +6,20 @@ type MyButtonProps = {
     rightIcon?: ReactNode,
     size: "small" | "medium",
     handleClick?: () => void
+    isTitle?: boolean
 }
-const MyButton = ({ leftIcon, text, rightIcon, size, handleClick }: MyButtonProps) => {
+const MyButton = ({ leftIcon, text, rightIcon, size, handleClick, isTitle }: MyButtonProps) => {
     return (
-        <Button className="my-button" size={size} onClick={handleClick}>
+        <Button
+            className="my-button"
+            onClick={handleClick}
+            style={{
+                borderRadius: isTitle ? "0" : "4px",
+                padding: size == "small" ? "10px" : "15px",
+                justifyContent: "start",
+                fontSize: size == "small" ? "12px" : "15px"
+            }}
+        >
             <span>
                 {leftIcon && leftIcon}
             </span>
@@ -17,7 +27,7 @@ const MyButton = ({ leftIcon, text, rightIcon, size, handleClick }: MyButtonProp
             <span>
                 {rightIcon && rightIcon}
             </span>
-        </Button>
+        </Button >
     )
 }
 

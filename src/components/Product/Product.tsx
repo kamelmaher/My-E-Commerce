@@ -1,0 +1,31 @@
+import { Box } from "@mui/material"
+import { ProductType } from "../../types/Product"
+import ProductRating from "./ProductRating"
+import ProductsDetails from "./ProductsDetails"
+import ProductControls from "./ProductControls"
+import ProductImg from "./ProductImg"
+type ProductProps = {
+    product: ProductType
+}
+const Product = ({ product }: ProductProps) => {
+    return (
+        <Box
+            boxShadow={"0 2px 8px rgba(0, 0, 0, 0.08)"}
+            border={"1px solid var(--border-color)"}
+            padding={"10px"}
+            width={{
+                xs: "100%",
+                sm: "calc(100% / 2 - 10px)",
+                md: "calc(100% / 3 - 10px)",
+                lg: "calc(100% / 5 - 10px)"
+            }}
+        >
+            <ProductImg img={product.img} name={product.name} />
+            <ProductRating rating={product.rating} />
+            <ProductsDetails name={product.name} price={product.price} old_price={product.old_price} />
+            <ProductControls />
+        </Box>
+    )
+}
+
+export default Product

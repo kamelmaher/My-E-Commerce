@@ -6,12 +6,13 @@ import picture from "/banner_home3.png"
 import { Box, Stack } from "@mui/material"
 const Slider = () => {
     return (
-        <Stack direction={"row"} gap={2}>
+        <Stack direction={"row"} gap={2} >
             <Box
                 width={{
                     xs: "100%",
                     lg: "75%"
-                }}>
+                }}
+            >
                 <Swiper
                     slidesPerView={1}
                 >
