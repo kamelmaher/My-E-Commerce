@@ -1,6 +1,6 @@
-import Section from "../Section"
+import ProductsContainer from "../../components/Product/ProductsContainer"
+import Section from "../../components/Section"
 import { ProductType } from "../../types/Product"
-import ProductsContainer from "../Product/ProductsContainer"
 type HotDealsProps = {
     products: ProductType[]
 }

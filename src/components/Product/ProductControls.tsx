@@ -8,7 +8,8 @@ const ProductControls = () => {
             direction={"row"}
             gap={2}
             alignItems={"center"}
-            mt={1}
+            justifyContent={"center"}
+            mt={2}
         >
             <MyButton size="small" text="add to cart" leftIcon={<ShoppingCartIcon />} />
             <Box

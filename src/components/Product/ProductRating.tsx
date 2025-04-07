@@ -9,9 +9,9 @@ const ProductRating = ({ rating }: ProductRatingProps) => {
         <Box fontSize={"8px"}>
             {
                 Array.from({ length: 5 }, (_, index) => (
-                    <p style={{ color: "var(--primary)", display: "inline-block" }}>
+                    <p key={index} style={{ color: "var(--primary)", display: "inline-block" }}>
                         {
-                            index > rating - 1 ? <StarBorderIcon key={index} /> : <StarIcon key={index} />
+                            index > rating - 1 ? <StarBorderIcon /> : <StarIcon key={index} />
                         }
                     </p>
                 ))

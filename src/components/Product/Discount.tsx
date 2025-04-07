@@ -4,7 +4,6 @@ type DiscountProps = {
     old_price: number
 }
 const Discount = ({ price, old_price }: DiscountProps) => {
-    console.log(old_price, price)
     return (
         <Box
             position={"absolute"}
