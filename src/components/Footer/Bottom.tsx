@@ -15,6 +15,10 @@ const Bottom = () => {
                 xs: "center",
                 md: "space-between"
             }}
+            padding={{
+                xs: "0 20px",
+                lg: "0 55px"
+            }}
             alignItems={"center"}
         >
             <p><span style={{ color: "var(--primary)" }}>© Reda Store.</span> All Rights Reserved.</p>

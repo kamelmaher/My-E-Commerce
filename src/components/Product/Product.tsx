@@ -5,6 +5,7 @@ import ProductsDetails from "./ProductsDetails"
 import ProductControls from "./ProductControls"
 import ProductImg from "./ProductImg"
 import Discount from "./Discount"
+import Animated from "../Animated"
 type ProductProps = {
     product: ProductType
 }
@@ -23,14 +24,16 @@ const Product = ({ product }: ProductProps) => {
             mb={2}
             position={"relative"}
         >
-            <ProductImg img={product.img} name={product.name} />
-            <ProductRating rating={product.rating} />
-            <ProductsDetails name={product.name} price={product.price} old_price={product.old_price} />
-            <ProductControls />
-            {
-                product.old_price &&
-                <Discount price={product.price} old_price={product.old_price} />
-            }
+            <Animated>
+                <ProductImg img={product.img} name={product.name} />
+                <ProductRating rating={product.rating} />
+                <ProductsDetails name={product.name} price={product.price} old_price={product.old_price} />
+                <ProductControls />
+                {
+                    product.old_price &&
+                    <Discount price={product.price} old_price={product.old_price} />
+                }
+            </Animated>
         </Box>
     )
 }

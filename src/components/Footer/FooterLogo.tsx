@@ -9,7 +9,7 @@ const FooterLogo = () => {
                 md: "calc(100% / 2)",
                 lg: "calc(100% / 4)"
             }}
-            padding={3}
+            padding={"10px 0"}
             textAlign={{
                 xs: "center",
                 md: "start"

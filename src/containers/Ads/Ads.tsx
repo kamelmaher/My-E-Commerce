@@ -1,5 +1,6 @@
 import { Box, Stack } from "@mui/material"
 import Section from "../../components/Section"
+import Animated from "../../components/Animated"
 type AdsProps = {
     images: string[]
 }
@@ -13,6 +14,8 @@ const Ads = ({ images }: AdsProps) => {
             >
                 {
                     images.map(img => <Box
+                        borderRadius={1}
+                        overflow={"hidden"}
                         mb={2}
                         width={{
                             xs: "100%",
@@ -20,7 +23,9 @@ const Ads = ({ images }: AdsProps) => {
                         }}
                         key={img}
                     >
-                        <img src={img} alt="" loading="lazy" />
+                        <Animated>
+                            <img src={img} alt="banner Box" loading="lazy" />
+                        </Animated>
                     </Box>)
                 }
             </Stack>
