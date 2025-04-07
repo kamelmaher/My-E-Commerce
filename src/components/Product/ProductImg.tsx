@@ -12,7 +12,7 @@ const ProductImg = ({ img, name }: ProductImgPropps) => {
             m={"auto"}
             mb={2}
         >
-            <img src={img} alt={name} />
+            <img src={img} alt={name} loading="lazy" />
         </Box>
     )
 }
