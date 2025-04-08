@@ -10,15 +10,14 @@ import LabelImportantIcon from '@mui/icons-material/LabelImportant';
 import { Stack, Box } from "@mui/material";
 import { useRef } from "react";
 import Section from "../Section";
-import { useFetch } from "../../hooks/useFetch";
 import { ProductType } from "../../types/Product";
 
 type ProductsContainerProps = {
     title: string
     id: string
+    products: ProductType[]
 }
-const ProductsContainer = ({ title, id }: ProductsContainerProps) => {
-    const products = useFetch<ProductType[]>(`https://dummyjson.com/products/category/${title}`)
+const ProductsContainer = ({ title, id, products }: ProductsContainerProps) => {
     const swiperRef = useRef<SwiperType | null>(null);
     const handleNext = () => {
         swiperRef.current?.slideNext();
@@ -46,32 +45,30 @@ const ProductsContainer = ({ title, id }: ProductsContainerProps) => {
                 </Stack>
             </Stack>
             {
-                !products.isLoading ?
-                    <Swiper
-                        modules={[Navigation]}
-                        onSwiper={(swiper) => (swiperRef.current = swiper)}
-                        spaceBetween={20}
-                        slidesPerView={1}
-                        loop
-                        breakpoints={{
-                            640: {
-                                slidesPerView: 2,
-                            },
-                            768: {
-                                slidesPerView: 3,
-                            },
-                            1024: {
-                                slidesPerView: 4,
-                            },
-                        }}
-                    >
-                        {
-                            products.data!.map(product => <SwiperSlide key={product.id}>
-                                <Product product={product} />
-                            </SwiperSlide>)
-                        }
-                    </Swiper>
-                    : <p>Loading...</p>
+                <Swiper
+                    modules={[Navigation]}
+                    onSwiper={(swiper) => (swiperRef.current = swiper)}
+                    spaceBetween={20}
+                    slidesPerView={1}
+                    loop
+                    breakpoints={{
+                        640: {
+                            slidesPerView: 2,
+                        },
+                        768: {
+                            slidesPerView: 3,
+                        },
+                        1024: {
+                            slidesPerView: 4,
+                        },
+                    }}
+                >
+                    {
+                        products.map(product => <SwiperSlide key={product.id}>
+                            <Product product={product} />
+                        </SwiperSlide>)
+                    }
+                </Swiper>
             }
         </Section>
     )

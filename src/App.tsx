@@ -4,11 +4,14 @@ import Nav from "./components/Nav/Nav"
 import Links from "./components/Links/Links"
 import Hero from "./components/Hero/Hero"
 import Footer from "./components/Footer/Footer"
-// import ProductsContainer from 
 import { categories } from "./data/Categories"
 import React, { Suspense } from "react"
+import { useFetch } from "./hooks/useFetch"
+import { ProductType } from "./types/Product"
 const App = () => {
+  const products = useFetch<ProductType[]>("https://dummyjson.com/products?limit=250")
   const ProductsContainer = React.lazy(() => import('./components/Product/ProductsContainer'));
+  const filtered = (category: string) => products.data!.filter(product => product.category == category)
   return (
     <Box>
       <Box
@@ -21,9 +24,10 @@ const App = () => {
         <Links />
         <Hero />
         {
-          categories.map(category => <Suspense key={category} fallback={<p>Loading...</p>}>
-            <ProductsContainer id={category} title={category} />
-          </Suspense>)
+          !products.isLoading ?
+            categories.map(category => <Suspense key={category}>
+              <ProductsContainer id={category} title={category} products={filtered(category)} />
+            </Suspense>) : <p>Loading ...</p>
         }
       </Box>
       <Footer />
