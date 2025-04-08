@@ -31,7 +31,7 @@ const HiddenMenu = () => {
             >
                 <MenuIcon />
             </Box>
-            <Menu show={showMenu} maxHeight="180px">
+            <Menu show={showMenu} height="180px">
                 {
                     pages.map(page => <p
                         key={page}
