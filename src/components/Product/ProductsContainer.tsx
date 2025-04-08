@@ -44,32 +44,30 @@ const ProductsContainer = ({ title, id, products }: ProductsContainerProps) => {
                     <ProductButton icon={<ChevronRightIcon />} handleClick={handleNext} />
                 </Stack>
             </Stack>
-            {
-                <Swiper
-                    modules={[Navigation]}
-                    onSwiper={(swiper) => (swiperRef.current = swiper)}
-                    spaceBetween={20}
-                    slidesPerView={1}
-                    loop
-                    breakpoints={{
-                        640: {
-                            slidesPerView: 2,
-                        },
-                        768: {
-                            slidesPerView: 3,
-                        },
-                        1024: {
-                            slidesPerView: 4,
-                        },
-                    }}
-                >
-                    {
-                        products.map(product => <SwiperSlide key={product.id}>
-                            <Product product={product} />
-                        </SwiperSlide>)
-                    }
-                </Swiper>
-            }
+            <Swiper
+                modules={[Navigation]}
+                onSwiper={(swiper) => (swiperRef.current = swiper)}
+                spaceBetween={20}
+                slidesPerView={1}
+                loop={products.length > 4}
+                breakpoints={{
+                    640: {
+                        slidesPerView: 2,
+                    },
+                    768: {
+                        slidesPerView: 3,
+                    },
+                    1024: {
+                        slidesPerView: 4,
+                    },
+                }}
+            >
+                {
+                    products.map(product => <SwiperSlide key={product.id}>
+                        <Product product={product} />
+                    </SwiperSlide>)
+                }
+            </Swiper>
         </Section>
     )
 }
