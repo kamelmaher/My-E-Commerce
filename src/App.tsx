@@ -1,9 +1,5 @@
 import "./App.css"
-import { Box } from "@mui/material"
-import Nav from "./components/Nav/Nav"
-import Links from "./components/Links/Links"
 import Hero from "./components/Hero/Hero"
-import Footer from "./components/Footer/Footer"
 import React, { Suspense } from "react"
 import { useFetch } from "./hooks/useFetch"
 import { ProductType } from "./types/Product"
@@ -14,38 +10,28 @@ const App = () => {
   const ProductsContainer = React.lazy(() => import('./components/Product/ProductsContainer'));
   const filtered = (category: string) => products.data!.filter(product => product.category == category)
   return (
-    <Box>
-      <Box
-        padding={{
-          xs: "0 20px",
-          lg: "0 55px"
-        }}
-      >
-        <Nav />
-        <Links />
-        <Hero />
-        {
-          !products.isLoading ?
-            <>
-              <Suspense>
-                <ProductsContainer id={"beauty"} title={"beauty"} products={filtered("beauty")} />
-              </Suspense>
-              <Ads images={bannerImages.slice(0, 2)} />
-              <Suspense>
-                <ProductsContainer id={"groceries"} title={"groceries"} products={filtered("groceries")} />
-              </Suspense>
-              <Suspense>
-                <ProductsContainer id={"laptops"} title={"laptops"} products={filtered("laptops")} />
-              </Suspense>
-              <Ads images={bannerImages.slice(2, 5)} />
-              <Suspense>
-                <ProductsContainer id={"tablets"} title={"tablets"} products={filtered("tablets")} />
-              </Suspense>
-            </> : <p>Loading</p>
-        }
-      </Box>
-      <Footer />
-    </Box >
+    <>
+      <Hero />
+      {
+        !products.isLoading ?
+          <>
+            <Suspense>
+              <ProductsContainer title={"beauty"} products={filtered("beauty")} />
+            </Suspense>
+            <Ads images={bannerImages.slice(0, 2)} />
+            <Suspense>
+              <ProductsContainer title={"groceries"} products={filtered("groceries")} />
+            </Suspense>
+            <Suspense>
+              <ProductsContainer title={"laptops"} products={filtered("laptops")} />
+            </Suspense>
+            <Ads images={bannerImages.slice(2, 5)} />
+            <Suspense>
+              <ProductsContainer title={"tablets"} products={filtered("tablets")} />
+            </Suspense>
+          </> : <p>Loading</p>
+      }
+    </>
   )
 }
 

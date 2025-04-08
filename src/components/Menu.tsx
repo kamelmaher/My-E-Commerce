@@ -4,9 +4,9 @@ type MenuProps = {
     children: ReactNode
     w?: string
     show: boolean
-    maxHeight?: string
+    height?: string
 }
-const Menu = ({ children, w, show, maxHeight }: MenuProps) => {
+const Menu = ({ children, w, show, height }: MenuProps) => {
     return (
         <Box
             height={0}
@@ -17,8 +17,8 @@ const Menu = ({ children, w, show, maxHeight }: MenuProps) => {
                 zIndex={1542}
                 bgcolor={"white"}
                 width={w}
-                height={show ? maxHeight ? maxHeight : "300px" : "0"}
-                overflow={"hidden"}
+                height={show ? height ? height : "200px" : "0"}
+                overflow={"auto"}
                 sx={{ transition: "height 0.2s ease-in-out" }}
             >
                 {children}

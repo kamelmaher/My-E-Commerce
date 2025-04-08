@@ -14,11 +14,11 @@ import { ProductType } from "../../types/Product";
 
 type ProductsContainerProps = {
     title: string
-    id: string
     products: ProductType[]
 }
-const ProductsContainer = ({ title, id, products }: ProductsContainerProps) => {
+const ProductsContainer = ({ title, products }: ProductsContainerProps) => {
     const swiperRef = useRef<SwiperType | null>(null);
+    
     const handleNext = () => {
         swiperRef.current?.slideNext();
     };
@@ -26,10 +26,10 @@ const ProductsContainer = ({ title, id, products }: ProductsContainerProps) => {
     const handlePrev = () => {
         swiperRef.current?.slidePrev();
     };
+
     return (
         <Section>
             <Stack
-                id={id}
                 direction={"row"}
                 justifyContent={"space-between"}
                 alignItems={"center"}

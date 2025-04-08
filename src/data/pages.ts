@@ -1,3 +1,3 @@
 /** @format */
 
-export const pages = ["Home", "About", "Accesories", "Blog", "Contact"];
+export const pages = ["Home", "About", "Mens", "Womens", "Contact"];

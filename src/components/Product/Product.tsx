@@ -7,10 +7,20 @@ import ProductImg from "./ProductImg"
 import Animated from "../Animated"
 type ProductProps = {
     product: ProductType
+    isRow?: boolean
 }
-const Product = ({ product }: ProductProps) => {
+const Product = ({ product, isRow }: ProductProps) => {
     return (
-        <Box>
+        <Box
+            width={
+                !isRow ? "initial" :
+                    {
+                        xs: "100%",
+                        md: "calc(100% / 3 - 5px)",
+                        lg: "calc(100% / 4 - 5px)"
+                    }
+            }
+        >
             <Animated>
                 <Box
                     borderRadius={2}

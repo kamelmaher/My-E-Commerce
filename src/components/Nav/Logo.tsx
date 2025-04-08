@@ -1,12 +1,15 @@
 import { Box } from "@mui/material"
 import LogoImage from "/logo.png"
+import { NavLink } from "react-router-dom"
 
 const Logo = () => {
     return (
         <Box
             width={"180px"}
         >
-            <img src={LogoImage} alt="Logo" />
+            <NavLink to={"/"}>
+                <img src={LogoImage} alt="Logo" />
+            </NavLink>
         </Box>
     )
 }
