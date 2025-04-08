@@ -4,9 +4,11 @@ import Nav from "./components/Nav/Nav"
 import Links from "./components/Links/Links"
 import Hero from "./components/Hero/Hero"
 import Footer from "./components/Footer/Footer"
-import ProductsContainer from "./components/Product/ProductsContainer"
+// import ProductsContainer from 
 import { categories } from "./data/Categories"
+import React, { Suspense } from "react"
 const App = () => {
+  const ProductsContainer = React.lazy(() => import('./components/Product/ProductsContainer'));
   return (
     <Box>
       <Box
@@ -19,7 +21,9 @@ const App = () => {
         <Links />
         <Hero />
         {
-          categories.map(category => <ProductsContainer key={category} id={category} title={category} />)
+          categories.map(category => <Suspense key={category} fallback={<p>Loading...</p>}>
+            <ProductsContainer id={category} title={category} />
+          </Suspense>)
         }
       </Box>
       <Footer />
