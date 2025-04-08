@@ -6,8 +6,8 @@ type ElectronicsProps = {
 }
 const Electronics = ({ products }: ElectronicsProps) => {
     return (
-        <Section title="Electronics">
-            <ProductsContainer products={products} />
+        <Section>
+            <ProductsContainer products={products} title="Electronics" />
         </Section>
     )
 }

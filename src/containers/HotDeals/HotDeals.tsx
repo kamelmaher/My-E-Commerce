@@ -6,8 +6,8 @@ type HotDealsProps = {
 }
 const HotDeals = ({ products }: HotDealsProps) => {
     return (
-        <Section title="Hot Deals">
-            <ProductsContainer products={products} />
+        <Section>
+            <ProductsContainer products={products} title="Hot Deals" />
         </Section>
     )
 }

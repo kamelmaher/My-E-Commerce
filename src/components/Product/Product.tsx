@@ -11,12 +11,7 @@ type ProductProps = {
 }
 const Product = ({ product }: ProductProps) => {
     return (
-        <Box width={{
-            xs: "100%",
-            sm: "calc(100% / 2 - 10px)",
-            md: "calc(100% / 3 - 10px)",
-            lg: "calc(100% / 5 - 10px)"
-        }}>
+        <Box >
             <Animated>
                 <Box
                     borderRadius={2}

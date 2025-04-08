@@ -1,7 +1,9 @@
-import { Box, Stack } from "@mui/material"
+import { Stack } from "@mui/material"
 import MyButton from "../MyButton"
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ProductButton from "./ProductButton";
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+
 const ProductControls = () => {
     return (
         <Stack
@@ -12,18 +14,7 @@ const ProductControls = () => {
             mt={2}
         >
             <MyButton size="small" text="add to cart" leftIcon={<ShoppingCartIcon />} />
-            <Box
-                width={52}
-                height={52}
-                border={"1px solid var(--border-color)"}
-                color={"black"}
-                display={"flex"}
-                justifyContent={"center"}
-                alignItems={"center"}
-                className="pointer"
-            >
-                <FavoriteBorderOutlinedIcon />
-            </Box>
+            <ProductButton icon={<FavoriteBorderOutlinedIcon />} />
         </Stack>
     )
 }
