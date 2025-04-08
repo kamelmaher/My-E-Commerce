@@ -1,6 +1,6 @@
 /** @format */
 
-export type ProductType = {
+export type Root = {
   id: number;
   main_img: string;
   images: string[];
@@ -9,4 +9,6 @@ export type ProductType = {
   category: string;
   description: string;
   price: number;
+  title: string;
+  thumbnail: string;
 };

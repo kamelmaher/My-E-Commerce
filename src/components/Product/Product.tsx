@@ -4,14 +4,13 @@ import ProductRating from "./ProductRating"
 import ProductsDetails from "./ProductsDetails"
 import ProductControls from "./ProductControls"
 import ProductImg from "./ProductImg"
-import Discount from "./Discount"
 import Animated from "../Animated"
 type ProductProps = {
     product: ProductType
 }
 const Product = ({ product }: ProductProps) => {
     return (
-        <Box >
+        <Box>
             <Animated>
                 <Box
                     borderRadius={2}
@@ -21,14 +20,14 @@ const Product = ({ product }: ProductProps) => {
                     mb={2}
                     position={"relative"}
                 >
-                    <ProductImg img={product.img} name={product.name} />
+                    <ProductImg img={product.main_img} name={product.name} />
                     <ProductRating rating={product.rating} />
-                    <ProductsDetails name={product.name} price={product.price} old_price={product.old_price} />
+                    <ProductsDetails name={product.name} price={product.price} desc={product.description} />
                     <ProductControls />
-                    {
+                    {/* {
                         product.old_price &&
                         <Discount price={product.price} old_price={product.old_price} />
-                    }
+                    } */}
                 </Box>
             </Animated>
         </Box>

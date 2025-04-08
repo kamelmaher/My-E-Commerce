@@ -15,7 +15,9 @@ const CategoriesMenu = ({ showMenu, closeMenu }: CategoriesMenuProps) => {
                     padding={"5px 10px"}
                     className="pointer"
                     onClick={closeMenu}
-                >{category}</Box>)
+                >
+                    <a href={`#${category}`}>{category}</a>
+                </Box>)
             }
         </Menu>
     )

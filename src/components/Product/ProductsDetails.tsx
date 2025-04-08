@@ -3,14 +3,18 @@ type ProductsDetailsProps = {
     name: string,
     price: number,
     old_price?: number
+    desc: string
 }
-const ProductsDetails = ({ name, price, old_price }: ProductsDetailsProps) => {
+const ProductsDetails = ({ name, price, old_price, desc }: ProductsDetailsProps) => {
     return (
         <Box>
             <p className="product-name">
                 <a>
                     {name}
                 </a>
+                <span>
+                    {desc}
+                </span>
             </p>
             <p>
                 <span style={{ fontSize: "18px", fontWeight: "600", color: "var(--primary)" }}>${price}</span>

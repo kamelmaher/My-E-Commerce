@@ -11,7 +11,7 @@ const ProductRating = ({ rating }: ProductRatingProps) => {
                 Array.from({ length: 5 }, (_, index) => (
                     <p key={index} style={{ color: "var(--primary)", display: "inline-block" }}>
                         {
-                            index > rating - 1 ? <StarBorderIcon /> : <StarIcon key={index} />
+                            index > Math.ceil(rating) - 1 ? <StarBorderIcon /> : <StarIcon key={index} />
                         }
                     </p>
                 ))
