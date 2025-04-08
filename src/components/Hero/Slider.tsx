@@ -6,7 +6,7 @@ import picture from "/banner_home3.png"
 import { Box, Stack } from "@mui/material"
 const Slider = () => {
     return (
-        <Stack direction={"row"} gap={2} >
+        <Stack direction={"row"} gap={2} display={{ xs: "none", md: "flex" }}>
             <Box
                 width={{
                     xs: "100%",
@@ -16,7 +16,7 @@ const Slider = () => {
                 <Swiper
                     slidesPerView={1}
                 >
-                    <SwiperSlide>
+                    <SwiperSlide style={{ minHeight: "fit-content" }}>
                         <Slide img={product1} />
                     </SwiperSlide>
                     <SwiperSlide>
@@ -32,7 +32,7 @@ const Slider = () => {
             >
                 <img src={picture} alt="banner-product" />
             </Box>
-        </Stack >
+        </Stack>
     )
 }
 

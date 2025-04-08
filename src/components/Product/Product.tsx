@@ -19,6 +19,7 @@ const Product = ({ product }: ProductProps) => {
         }}>
             <Animated>
                 <Box
+                    borderRadius={2}
                     boxShadow={"0 2px 8px rgba(0, 0, 0, 0.08)"}
                     border={"1px solid var(--border-color)"}
                     padding={"13px"}
