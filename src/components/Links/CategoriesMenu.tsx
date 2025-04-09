@@ -13,7 +13,6 @@ const CategoriesMenu = ({ showMenu, closeMenu }: CategoriesMenuProps) => {
                 categories.map(category => <Box
                     key={category}
                     borderBottom={"1px solid var(--border-color)"}
-
                     className="pointer"
                     onClick={closeMenu}
                 >

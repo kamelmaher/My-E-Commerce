@@ -3,6 +3,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useEffect, useRef, useState } from "react";
 import { pages } from "../../data/pages";
 import Menu from "../Menu";
+import { NavLink } from "react-router-dom";
+import { getLink } from "../../utils/getLink";
 const HiddenMenu = () => {
 
     const [showMenu, setShowMenu] = useState(false)
@@ -25,6 +27,7 @@ const HiddenMenu = () => {
                 sm: 3
             }}
             ref={menuRef}
+            zIndex={2515}
         >
             <Box
                 onClick={() => setShowMenu(!showMenu)}
@@ -33,13 +36,15 @@ const HiddenMenu = () => {
             </Box>
             <Menu show={showMenu} height="180px">
                 {
-                    pages.map(page => <p
+                    pages.map(page => <NavLink
                         key={page}
                         style={{
-                            padding: "5px 10px"
+                            padding: "5px 10px",
+                            display: "block"
                         }}
+                        to={getLink(page)}
                         onClick={() => setShowMenu(false)}
-                    >{page}</p>)
+                    >{page}</NavLink>)
                 }
             </Menu>
         </Box>

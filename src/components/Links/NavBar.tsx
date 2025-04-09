@@ -1,6 +1,7 @@
 import { Stack } from "@mui/material"
 import { pages } from "../../data/pages"
 import { NavLink } from "react-router-dom"
+import { getLink } from "../../utils/getLink"
 
 const NavBar = () => {
     return (
@@ -10,7 +11,7 @@ const NavBar = () => {
                     <NavLink
                         className={"nav-link"}
                         key={page}
-                        to={`/${(page == "Mens" || page == "Womens") ? "products/" : ""}${page != "Home" ? page.toLowerCase() : ""}`}
+                        to={getLink(page)}
                         style={{ fontSize: "17px" }}
                     >
                         {page}

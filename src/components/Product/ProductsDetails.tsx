@@ -1,4 +1,4 @@
-import { Box } from "@mui/material"
+import { Box, Typography } from "@mui/material"
 type ProductsDetailsProps = {
     name: string,
     price: number,
@@ -8,13 +8,15 @@ type ProductsDetailsProps = {
 const ProductsDetails = ({ name, price, old_price, desc }: ProductsDetailsProps) => {
     return (
         <Box>
-            <p className="product-name">
-                <a>
-                    {name}
-                </a>
-                <span>
-                    {desc}
-                </span>
+            <Typography
+                variant="h6"
+                fontSize={"18px"}
+                color="#2c1d0b"
+            >
+                {name}
+            </Typography>
+            <p className="product-desc" style={{ color: "#666666" }}>
+                {desc}
             </p>
             <p>
                 <span style={{ fontSize: "18px", fontWeight: "600", color: "var(--primary)" }}>${price}</span>

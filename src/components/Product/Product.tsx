@@ -29,6 +29,7 @@ const Product = ({ product, isRow }: ProductProps) => {
                     padding={"13px"}
                     mb={2}
                     position={"relative"}
+                    bgcolor={"white"}
                 >
                     <ProductImg img={product.main_img} name={product.name} />
                     <ProductRating rating={product.rating} />

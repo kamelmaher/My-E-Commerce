@@ -20,13 +20,9 @@ const MyButton = ({ leftIcon, text, rightIcon, size, handleClick, isTitle }: MyB
                 fontSize: size == "small" ? "12px" : "15px"
             }}
         >
-            <span>
-                {leftIcon && leftIcon}
-            </span>
+            {leftIcon && leftIcon}
             <span>{text && text}</span>
-            <span>
-                {rightIcon && rightIcon}
-            </span>
+            {rightIcon && rightIcon}
         </Button >
     )
 }
