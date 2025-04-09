@@ -3,8 +3,9 @@ import CategoriesButton from "./CategoriesButton"
 import NavBar from "./NavBar"
 import AuthButtons from "./AuthButtons"
 import HiddenMenu from "./HiddenMenu"
-
+import { useUser } from "../../hooks/useUser"
 const Links = () => {
+    const { user } = useUser()
     return (
         <Stack
             direction={"row"}
@@ -18,7 +19,9 @@ const Links = () => {
         >
             <CategoriesButton />
             <NavBar />
-            <AuthButtons />
+            {
+                user ? <p>Hello {user.name}</p> : <AuthButtons />
+            }
             <HiddenMenu />
         </Stack>
     )

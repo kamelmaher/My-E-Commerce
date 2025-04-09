@@ -30,6 +30,7 @@ body {
 .my-button {
   display: flex;
   align-items: center;
+  justify-content: center;
   background-color: var(--primary) !important;
   color: white !important;
   gap: 2px;

@@ -87,3 +87,21 @@
     width: 180px;
     text-align: start;
 }
+
+
+/* Auth */
+.MuiFormControl-root {
+    width: 100%;
+}
+
+.Mui-focused,
+.MuiOutlinedInput-input {
+    color: #2c1d0b !important;
+
+}
+
+.css-quhxjy-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: var(--primary) !important;
+}
+
+/* Auth */
