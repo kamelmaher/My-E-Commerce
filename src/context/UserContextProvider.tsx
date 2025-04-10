@@ -8,15 +8,11 @@ type UserContextProviderPRops = {
 }
 
 const UserContextProvider = ({ children }: UserContextProviderPRops) => {
-    const [isLogin, setIsLogin] = useState(() => {
-        const data = localStorage.getItem("isLogin")
-        if (data) return true
-        else return false
-    })
+    const [isLogin, setIsLogin] = useState(false)
     const [user, setUser] = useState<UserType>({} as UserType)
     const getUser = async (id: string) => {
         const { user } = await getUserFromDb(id)
-        setUser(user as UserType)
+        setUser({ ...user, id: id } as UserType)
     }
     useEffect(() => {
         const token = getCookie("authToken")
@@ -30,7 +26,6 @@ const UserContextProvider = ({ children }: UserContextProviderPRops) => {
                 console.log(error)
             }
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLogin])
     return (
         <userContext.Provider value={{ isLogin, setIsLogin, user, setUser }}>
