@@ -14,7 +14,6 @@ export const signUp = async (
   age: number,
   setIsLoding: (e: boolean) => void
 ) => {
-  let signUpError;
   try {
     setIsLoding(true);
     const userCredential = await createUserWithEmailAndPassword(
@@ -28,17 +27,20 @@ export const signUp = async (
         age,
         email,
       });
+
+    return { SignUpError: null };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
-    signUpError = error.message
+    const signUpError = error.message
       .replace(/[.)]/g, "")
       .trim()
       .split("/")[1]
       .split("-")
       .join(" ");
+    return { signUpError };
+  } finally {
+    setIsLoding(false);
   }
-  setIsLoding(false);
-  return { signUpError };
 };
 
 export const LoginUser = async (
@@ -46,37 +48,63 @@ export const LoginUser = async (
   password: string,
   setIsLoading: (e: boolean) => void
 ) => {
-  let loginError, user;
   try {
     setIsLoading(true);
     const myUser = await signInWithEmailAndPassword(auth, email, password);
-    user = myUser.user;
+    const user = myUser.user;
+    const idToken = await user.getIdToken();
+    setCookie("authToken", idToken, 4);
+    return { user, loginError: null };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
-    loginError = err.message
+    const loginError = err.message
       .replace(/[.)]/g, "")
       .trim()
       .split("/")[1]
       .split("-")
       .join(" ");
+    return { user: null, loginError };
+  } finally {
+    setIsLoading(false);
   }
-  setIsLoading(false);
-  return { user, loginError };
 };
 
 export const getUserFromDb = async (userId: string) => {
-  let fetchUserError, user;
   try {
     const userDocRef = doc(db, "users", userId);
     const userDoc = await getDoc(userDocRef);
     if (userDoc.exists()) {
-      user = userDoc.data();
+      const user = userDoc.data();
+      return { user, fetchUserError: null };
     } else {
-      fetchUserError = "User Not Found";
+      const fetchUserError = "User Not Found";
+      return { user: null, fetchUserError };
     }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
-    fetchUserError = error.message;
+    const fetchUserError = error.message;
+    return { user: null, fetchUserError };
   }
-  return { fetchUserError, user };
+};
+
+const setCookie = (name: string, value: string, days: number) => {
+  const expires = new Date();
+  expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+  document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/;secure;samesite=strict`;
+};
+
+export const getCookie = (name: string) => {
+  const nameEQ = name + "=";
+  const ca = document.cookie.split(";");
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) === " ") c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
+};
+
+export const logOut = () => {
+  document.cookie = `authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
+  window.location.reload();
 };

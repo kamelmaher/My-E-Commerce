@@ -1,24 +1,39 @@
 import { ReactNode, useEffect, useState } from "react"
 import { userContext } from "../hooks/useUser"
-import { getUserFromDb } from "../services/auth"
 import { UserType } from "../types/User"
+import { getCookie, getUserFromDb } from "../services/auth"
+import { jwtDecode } from "jwt-decode"
 type UserContextProviderPRops = {
     children: ReactNode
 }
-const UserContextProvider = ({ children }: UserContextProviderPRops) => {
-    const [isLogin, setIsLogin] = useState(false)
-    const [id, setId] = useState("")
-    const [user, setUser] = useState<UserType>({} as UserType)
-    useEffect(() => {
 
-        const fetchUser = async () => {
-            const { user: fetchedUser } = await getUserFromDb(id)
-            setUser(fetchedUser as UserType)
+const UserContextProvider = ({ children }: UserContextProviderPRops) => {
+    const [isLogin, setIsLogin] = useState(() => {
+        const data = localStorage.getItem("isLogin")
+        if (data) return true
+        else return false
+    })
+    const [user, setUser] = useState<UserType>({} as UserType)
+    const getUser = async (id: string) => {
+        const { user } = await getUserFromDb(id)
+        setUser(user as UserType)
+    }
+    useEffect(() => {
+        const token = getCookie("authToken")
+        if (token) {
+            try {
+                const decodedToken: { user_id: string } = jwtDecode(token);
+                const id = decodedToken.user_id
+                getUser(id)
+                setIsLogin(true)
+            } catch (error) {
+                console.log(error)
+            }
         }
-        fetchUser()
-    }, [id])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isLogin])
     return (
-        <userContext.Provider value={{ isLogin, setIsLogin, id, setId, user }}>
+        <userContext.Provider value={{ isLogin, setIsLogin, user, setUser }}>
             {children}
         </userContext.Provider>
     )

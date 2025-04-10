@@ -4,17 +4,19 @@ import MyButton from "../components/MyButton";
 import { FormEvent, useEffect, useState } from "react";
 import { UserType } from "../types/User";
 import { signUp } from "../services/auth";
+const inputs = ["Name", "Age", "Email", "Password"]
 const Signup = () => {
     const [newUser, setNewUser] = useState<UserType>({} as UserType)
-    const inputs = ["Name", "Age", "Email", "Password"]
     const [result, setResult] = useState({ success: false, error: "" })
     const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate()
+
     useEffect(() => {
         if (result.success) {
             navigate("/auth/login")
         }
     }, [result.success])
+
     const handleOnSubmit = async (e: FormEvent) => {
         e.preventDefault()
         const { signUpError } = await signUp(newUser.email, newUser.password!, newUser.name, newUser.age, setIsLoading)

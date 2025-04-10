@@ -5,9 +5,8 @@ import { UserType } from "../types/User";
 type userContextType = {
   isLogin: boolean;
   setIsLogin: (e: boolean) => void;
-  id: string;
-  setId: (id: string) => void;
   user: UserType;
+  setUser: (e: UserType) => void;
 };
 export const userContext = createContext<userContextType>(
   {} as userContextType

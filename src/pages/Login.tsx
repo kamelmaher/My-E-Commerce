@@ -3,29 +3,31 @@ import MyButton from "../components/MyButton";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FormEvent, useEffect, useState } from "react";
 import { LoginUser } from "../services/auth";
-import { useUser } from "../hooks/useUser";
 import { UserType } from "../types/User";
+import { useUser } from "../hooks/useUser";
+const inputs = ["email", "password"]
 const Login = () => {
-    const inputs = ["email", "password"]
     const [user, setUser] = useState<UserType>({} as UserType)
     const [result, setResult] = useState({ success: false, error: "" })
     const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate()
-    const { setIsLogin, setId } = useUser()
+    const { setIsLogin } = useUser()
     useEffect(() => {
         if (result.success) {
-            setIsLogin(true)
             navigate("/")
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [result.success])
+
     const handleOnSubmit = async (e: FormEvent) => {
         e.preventDefault()
-        const { loginError, user: returnedUser } = await LoginUser(user.email, user.password!, setIsLoading)
+        const { loginError } = await LoginUser(user.email, user.password!, setIsLoading)
         setResult({ success: loginError ? false : true, error: loginError })
-        if (!loginError && returnedUser)
-            setId(returnedUser.uid)
+        if (!loginError) {
+            setIsLogin(true)
+        }
     }
+
     return (
         <form style={{ padding: "20px", width: "350px" }} className="auth-form" onSubmit={handleOnSubmit}>
             <Typography variant="h5" textAlign={"center"} mb={2}>Log in</Typography>

@@ -4,6 +4,9 @@ import NavBar from "./NavBar"
 import AuthButtons from "./AuthButtons"
 import HiddenMenu from "./HiddenMenu"
 import { useUser } from "../../hooks/useUser"
+import MyButton from "../MyButton"
+import LoginIcon from '@mui/icons-material/Login';
+import { logOut } from "../../services/auth"
 const Links = () => {
     const { user } = useUser()
     return (
@@ -20,7 +23,15 @@ const Links = () => {
             <CategoriesButton />
             <NavBar />
             {
-                user ? <p>Hello {user.name}</p> : <AuthButtons />
+                user.name ? <Stack direction={"row"} gap={2} order={{
+                    xs: 3,
+                    sm: 2
+                }}
+                    alignItems={"center"}
+                >
+                    <p>Hello {user.name}</p>
+                    <MyButton size={"small"} text="Log out" leftIcon={<LoginIcon />} handleClick={logOut} />
+                </Stack> : <AuthButtons />
             }
             <HiddenMenu />
         </Stack>
