@@ -14,6 +14,7 @@ const UserContextProvider = ({ children }: UserContextProviderPRops) => {
         const { user } = await getUserFromDb(id)
         setUser({ ...user, id: id } as UserType)
     }
+
     useEffect(() => {
         const token = getCookie("authToken")
         if (token) {

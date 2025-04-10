@@ -21,14 +21,15 @@ export const signUp = async (
       email,
       password
     );
-    if (userCredential && userCredential.user)
+    if (userCredential && userCredential.user) {
       await setDoc(doc(db, "users", userCredential.user.uid), {
         name,
         age,
         email,
       });
+    }
 
-    return { SignUpError: null };
+    return { SignUpError: null, user: userCredential.user };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     const signUpError = error.message
@@ -37,7 +38,7 @@ export const signUp = async (
       .split("/")[1]
       .split("-")
       .join(" ");
-    return { signUpError };
+    return { signUpError, user: null };
   } finally {
     setIsLoding(false);
   }

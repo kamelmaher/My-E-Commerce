@@ -3,8 +3,11 @@ import MyButton from "../MyButton"
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ProductButton from "./ProductButton";
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-
-const ProductControls = () => {
+type ProductControlsProps = {
+    addToCart: () => void
+    inCart: boolean
+}
+const ProductControls = ({ addToCart, inCart }: ProductControlsProps) => {
     return (
         <Stack
             direction={"row"}
@@ -13,7 +16,7 @@ const ProductControls = () => {
             justifyContent={"center"}
             mt={2}
         >
-            <MyButton size="small" text="add to cart" leftIcon={<ShoppingCartIcon />} />
+            <MyButton size="small" text={inCart ? "In Cart" : "Add To Cart"} leftIcon={<ShoppingCartIcon />} handleClick={addToCart} />
             <ProductButton icon={<FavoriteBorderOutlinedIcon />} />
         </Stack>
     )

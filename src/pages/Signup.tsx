@@ -4,13 +4,14 @@ import MyButton from "../components/MyButton";
 import { FormEvent, useEffect, useState } from "react";
 import { UserType } from "../types/User";
 import { signUp } from "../services/auth";
+import { useCart } from "../hooks/useCart";
 const inputs = ["Name", "Age", "Email", "Password"]
 const Signup = () => {
     const [newUser, setNewUser] = useState<UserType>({} as UserType)
     const [result, setResult] = useState({ success: false, error: "" })
     const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate()
-
+    const { createCart } = useCart()
     useEffect(() => {
         if (result.success) {
             navigate("/auth/login")
@@ -19,8 +20,11 @@ const Signup = () => {
 
     const handleOnSubmit = async (e: FormEvent) => {
         e.preventDefault()
-        const { signUpError } = await signUp(newUser.email, newUser.password!, newUser.name, newUser.age, setIsLoading)
+        const { signUpError, user: returnedUser } = await signUp(newUser.email, newUser.password!, newUser.name, newUser.age, setIsLoading)
         setResult({ success: signUpError ? false : true, error: signUpError })
+        if (returnedUser) {
+            createCart(returnedUser.uid)
+        }
     }
     return (
         <form style={{ padding: "20px", width: "350px" }} className="auth-form" onSubmit={handleOnSubmit}>

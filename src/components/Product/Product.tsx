@@ -5,11 +5,21 @@ import ProductsDetails from "./ProductsDetails"
 import ProductControls from "./ProductControls"
 import ProductImg from "./ProductImg"
 import Animated from "../Animated"
+import { useCart } from "../../hooks/useCart"
+import { useUser } from "../../hooks/useUser"
+import { useNavigate } from "react-router-dom"
 type ProductProps = {
     product: ProductType
     isRow?: boolean
 }
 const Product = ({ product, isRow }: ProductProps) => {
+    const { user } = useUser()
+    const { addToCart, checkInCart } = useCart()
+    const navigate = useNavigate()
+    const handleAddToCart = () => {
+        if (checkInCart(user.id, product.id)) return
+        if (!addToCart(product, user.id)) navigate("/auth/login")
+    }
     return (
         <Box
             width={
@@ -35,7 +45,7 @@ const Product = ({ product, isRow }: ProductProps) => {
                     <ProductImg img={product.main_img} name={product.name} />
                     <ProductRating rating={product.rating} />
                     <ProductsDetails name={product.name} price={product.price} desc={product.description} />
-                    <ProductControls />
+                    <ProductControls addToCart={handleAddToCart} inCart={checkInCart(user.id, product.id)} />
                     {/* {
                         product.old_price &&
                         <Discount price={product.price} old_price={product.old_price} />
