@@ -53,7 +53,12 @@ export const LoginUser = async (
     user = myUser.user;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
-    loginError = err.message;
+    loginError = err.message
+      .replace(/[.)]/g, "")
+      .trim()
+      .split("/")[1]
+      .split("-")
+      .join(" ");
   }
   setIsLoading(false);
   return { user, loginError };

@@ -17,7 +17,7 @@ const Login = () => {
             setIsLogin(true)
             navigate("/")
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [result.success])
     const handleOnSubmit = async (e: FormEvent) => {
         e.preventDefault()
@@ -37,6 +37,9 @@ const Login = () => {
             <Box>
                 <MyButton size="small" text="Log in" w="100%" fs="17px" submit isLoading={isLoading} />
             </Box>
+            {
+                result.error && <p style={{ color: "red", textAlign: "center" }}>{result.error}</p>
+            }
             <span style={{ fontSize: "15px" }}>dont have an account ? <NavLink to={"/auth/signup"} style={{ color: "var(--primary)", fontWeight: "600" }}>Sign Up</NavLink></span>
         </form>
     )
