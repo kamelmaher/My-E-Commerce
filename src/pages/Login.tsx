@@ -17,6 +17,7 @@ const Login = () => {
             setIsLogin(true)
             navigate("/")
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [result.success])
     const handleOnSubmit = async (e: FormEvent) => {
         e.preventDefault()
