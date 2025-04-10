@@ -5,6 +5,7 @@ import { useFetch } from "./hooks/useFetch"
 import { ProductType } from "./types/Product"
 import Ads from "./components/Ads/Ads"
 import { bannerImages } from "./data/BannerImages"
+import Loading from "./components/Loading"
 const App = () => {
   const products = useFetch<ProductType[]>("https://dummyjson.com/products?limit=250")
   const ProductsContainer = React.lazy(() => import('./components/Product/ProductsContainer'));
@@ -29,7 +30,7 @@ const App = () => {
             <Suspense>
               <ProductsContainer title={"tablets"} products={filtered("tablets")} />
             </Suspense>
-          </> : <p>Loading</p>
+          </> : <Loading />
       }
     </>
   )

@@ -51,6 +51,14 @@
 }
 
 /* Product */
+.product-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
 .product-desc {
     font-size: 15px;
     margin-bottom: 8px;

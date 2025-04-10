@@ -12,6 +12,7 @@ const ProductsDetails = ({ name, price, old_price, desc }: ProductsDetailsProps)
                 variant="h6"
                 fontSize={"18px"}
                 color="#2c1d0b"
+                className="product-name"
             >
                 {name}
             </Typography>

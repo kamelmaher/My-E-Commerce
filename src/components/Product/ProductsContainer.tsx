@@ -18,7 +18,7 @@ type ProductsContainerProps = {
 }
 const ProductsContainer = ({ title, products }: ProductsContainerProps) => {
     const swiperRef = useRef<SwiperType | null>(null);
-    
+
     const handleNext = () => {
         swiperRef.current?.slideNext();
     };

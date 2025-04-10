@@ -13,12 +13,13 @@ const Product = ({ product, isRow }: ProductProps) => {
     return (
         <Box
             width={
-                !isRow ? "initial" :
+                isRow ?
                     {
                         xs: "100%",
                         md: "calc(100% / 3 - 5px)",
                         lg: "calc(100% / 4 - 5px)"
-                    }
+                    } :
+                    "initial"
             }
         >
             <Animated>
