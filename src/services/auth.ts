@@ -6,7 +6,7 @@ import {
 } from "firebase/auth";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../firebase/firebase";
-
+import { toast } from "react-toastify";
 export const signUp = async (
   email: string,
   password: string,
@@ -28,7 +28,7 @@ export const signUp = async (
         email,
       });
     }
-
+    toast.success("Account Created Succefully!")
     return { SignUpError: null, user: userCredential.user };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {

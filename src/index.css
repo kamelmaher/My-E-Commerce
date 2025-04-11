@@ -6,6 +6,11 @@
   --primary: #ff8716;
   --bg-color: #f3f3f3;
   --border-color: #e5e5e5d5;
+  /* Toastify */
+  --toastify-toast-padding: 10px;
+  --toastify-toast-min-height: 55px;
+  --toastify-font-family: "Poppins",
+    sans-serif;
 }
 
 html {
@@ -49,4 +54,10 @@ input {
 
 .pointer {
   cursor: pointer;
+}
+
+/* Toastify */
+.Toastify__close-button {
+  position: initial;
+  margin-left: auto !important;
 }
