@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom"
 import { Box, Stack } from "@mui/material"
-import Logo from "../components/Nav/Logo"
+import Logo from "../../components/Nav/Logo"
 const Auth = () => {
     return (
         <Box

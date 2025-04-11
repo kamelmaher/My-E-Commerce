@@ -1,11 +1,11 @@
 import { Box, TextField, Typography } from "@mui/material";
-import MyButton from "../components/MyButton";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FormEvent, useEffect, useState } from "react";
-import { LoginUser } from "../services/auth";
-import { UserType } from "../types/User";
-import { useUser } from "../hooks/useUser";
 import { toast } from "react-toastify";
+import MyButton from "../../components/MyButton";
+import { useUser } from "../../hooks/useUser";
+import { LoginUser } from "../../services/auth";
+import { UserType } from "../../types/User";
 const inputs = ["email", "password"]
 const Login = () => {
     const [user, setUser] = useState<UserType>({} as UserType)

@@ -7,7 +7,7 @@ import Ads from "./components/Ads/Ads"
 import { bannerImages } from "./data/BannerImages"
 import Loading from "./components/Loading"
 const App = () => {
-  const products = useFetch<ProductType[]>("https://dummyjson.com/products?limit=250")
+  const products = useFetch<ProductType[]>("https://dummyjson.com/products?limit=250", true)
   const ProductsContainer = React.lazy(() => import('./components/Product/ProductsContainer'));
   const filtered = (category: string) => products.data!.filter(product => product.category == category)
   return (

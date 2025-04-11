@@ -5,7 +5,7 @@ import ProductsPage from "../components/Product/ProductsPage"
 
 const CategoryProducts = () => {
     const { categoryName } = useParams()
-    const products = useFetch<ProductType[]>(`https://dummyjson.com/products/category/${categoryName}`)
+    const products = useFetch<ProductType[]>(`https://dummyjson.com/products/category/${categoryName}`, true)
     return (
         <>
             <ProductsPage title={categoryName!.split("-").join(" ")} products={products.data!} isLoading={products.isLoading} />

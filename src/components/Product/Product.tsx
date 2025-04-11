@@ -7,8 +7,7 @@ import ProductImg from "./ProductImg"
 import Animated from "../Animated"
 import { useCart } from "../../hooks/useCart"
 import { useUser } from "../../hooks/useUser"
-import { useNavigate } from "react-router-dom"
-import { toast } from "react-toastify"
+import { NavLink } from "react-router-dom"
 type ProductProps = {
     product: ProductType
     isRow?: boolean
@@ -16,13 +15,6 @@ type ProductProps = {
 const Product = ({ product, isRow }: ProductProps) => {
     const { user } = useUser()
     const { addToCart, checkInCart } = useCart()
-    const navigate = useNavigate()
-    const handleAddToCart = () => {
-        if (!checkInCart(user.id, product.id)) {
-            if (addToCart(product, user.id)) toast.success("Added to cart! 🛒")
-            else navigate("/auth/login")
-        }
-    }
     return (
         <Box
             width={
@@ -45,16 +37,15 @@ const Product = ({ product, isRow }: ProductProps) => {
                     position={"relative"}
                     bgcolor={"white"}
                 >
-                    <ProductImg img={product.main_img} name={product.name} />
-                    <ProductRating rating={product.rating} />
-                    <ProductsDetails name={product.name} price={product.price} desc={product.description} />
-                    <ProductControls addToCart={handleAddToCart} inCart={checkInCart(user.id, product.id)} />
-                    {/* {
-                        product.old_price &&
-                        <Discount price={product.price} old_price={product.old_price} />
-                    } */}
+                    <NavLink to={`/product/${product.id}`}>
+                        <ProductImg img={product.main_img} name={product.name} />
+                        <ProductRating rating={product.rating} />
+                        <ProductsDetails name={product.name} price={product.price} desc={product.description} />
+                    </NavLink>
+                    <ProductControls addToCart={() => addToCart(product, user.id)} inCart={checkInCart(user.id, product.id)} />
                 </Box>
             </Animated>
+
         </Box>
     )
 }
