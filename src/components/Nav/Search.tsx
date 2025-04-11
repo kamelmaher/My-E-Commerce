@@ -8,7 +8,6 @@ const Search = () => {
             direction={"row"}
             spacing={1}
             alignItems={"center"}
-            height={55}
             display={{
                 xs: "none",
                 md: "flex"

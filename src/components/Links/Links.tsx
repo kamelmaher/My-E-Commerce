@@ -7,8 +7,9 @@ import { useUser } from "../../hooks/useUser"
 import MyButton from "../MyButton"
 import LoginIcon from '@mui/icons-material/Login';
 import { logOut } from "../../services/auth"
+import Loading from "../Loading"
 const Links = () => {
-    const { user } = useUser()
+    const { user, isLoading } = useUser()
     return (
         <Stack
             direction={"row"}
@@ -23,14 +24,20 @@ const Links = () => {
             <CategoriesButton />
             <NavBar />
             {
-                user.name ? <Stack direction={"row"} gap={2} order={{
+                !isLoading ? <Stack direction={"row"} gap={2} order={{
                     xs: 3,
                     sm: 2
                 }}
                     alignItems={"center"}
+                    minWidth={200}
+                    justifyContent={"center"}
                 >
-                    <p>Hello {user.name}</p>
-                    <MyButton size={"small"} text="Log out" leftIcon={<LoginIcon />} handleClick={logOut} />
+                    {
+                        user.name ? <>
+                            <p>Hello {user.name}</p>
+                            <MyButton size={"small"} text="Log out" leftIcon={<LoginIcon />} handleClick={logOut} />
+                        </> : <Loading height="fit-content" />
+                    }
                 </Stack> : <AuthButtons />
             }
             <HiddenMenu />

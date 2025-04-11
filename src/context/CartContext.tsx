@@ -16,7 +16,6 @@ const CartContextProvider = ({ children }: CartContextProviderProps) => {
 
     const addToCart = (product: ProductType, userId: string) => {
         if (!userId) return false
-        if (checkInCart(userId, product.id)) return false
         const newCarts = carts.map(cart => cart.userId == userId ? { ...cart, products: [...cart.products, product] } : cart)
         setCarts(newCarts)
         localStorage.setItem("carts", JSON.stringify(newCarts))

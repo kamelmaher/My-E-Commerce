@@ -8,6 +8,7 @@ import Animated from "../Animated"
 import { useCart } from "../../hooks/useCart"
 import { useUser } from "../../hooks/useUser"
 import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 type ProductProps = {
     product: ProductType
     isRow?: boolean
@@ -17,8 +18,10 @@ const Product = ({ product, isRow }: ProductProps) => {
     const { addToCart, checkInCart } = useCart()
     const navigate = useNavigate()
     const handleAddToCart = () => {
-        if (checkInCart(user.id, product.id)) return
-        if (!addToCart(product, user.id)) navigate("/auth/login")
+        if (!checkInCart(user.id, product.id)) {
+            if (addToCart(product, user.id)) toast.success("Added to cart! 🛒")
+            else navigate("/auth/login")
+        }
     }
     return (
         <Box

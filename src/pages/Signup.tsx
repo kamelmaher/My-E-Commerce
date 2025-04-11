@@ -5,6 +5,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { UserType } from "../types/User";
 import { signUp } from "../services/auth";
 import { useCart } from "../hooks/useCart";
+import { toast } from "react-toastify";
 const inputs = ["Name", "Age", "Email", "Password"]
 const Signup = () => {
     const [newUser, setNewUser] = useState<UserType>({} as UserType)
@@ -14,6 +15,7 @@ const Signup = () => {
     const { createCart } = useCart()
     useEffect(() => {
         if (result.success) {
+            toast.success("Your account has been created. 🙌")
             navigate("/auth/login")
         }
     }, [result.success])

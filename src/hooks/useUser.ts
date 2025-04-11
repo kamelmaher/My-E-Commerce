@@ -7,6 +7,7 @@ type userContextType = {
   setIsLogin: (e: boolean) => void;
   user: UserType;
   setUser: (e: UserType) => void;
+  isLoading: boolean;
 };
 export const userContext = createContext<userContextType>(
   {} as userContextType

@@ -5,6 +5,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { LoginUser } from "../services/auth";
 import { UserType } from "../types/User";
 import { useUser } from "../hooks/useUser";
+import { toast } from "react-toastify";
 const inputs = ["email", "password"]
 const Login = () => {
     const [user, setUser] = useState<UserType>({} as UserType)
@@ -14,6 +15,7 @@ const Login = () => {
     const { setIsLogin } = useUser()
     useEffect(() => {
         if (result.success) {
+            toast.success("Welcome back!")
             navigate("/")
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
