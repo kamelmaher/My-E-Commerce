@@ -10,10 +10,12 @@ export const useFetch = <T>(url: string, loop?: boolean) => {
   const [data, setData] = useState<T>();
   const [isLoading, setIsLoading] = useState(true);
   const [err, setErr] = useState("");
+  // url = products/mens|womens
+  const lastWord = url.split("/")[5];
+  const isGender = lastWord == "mens" || lastWord == "womens";
+
   useEffect(() => {
     setIsLoading(true);
-    const lastWord = url.split("/")[5];
-    const isGender = lastWord == "mens" || lastWord == "womens";
     if (isGender) {
       let allData: ProductType[] = [];
       categories.map((category) => {
@@ -75,6 +77,7 @@ export const useFetch = <T>(url: string, loop?: boolean) => {
         })
         .catch(() => setErr("Something wrong ..."))
         .finally(() => setIsLoading(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url]);
   return { data, isLoading, err };
 };
