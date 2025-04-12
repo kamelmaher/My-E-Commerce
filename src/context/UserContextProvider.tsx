@@ -18,8 +18,8 @@ const UserContextProvider = ({ children }: UserContextProviderPRops) => {
 
     useEffect(() => {
         const token = getCookie("authToken")
-        setIsLoading(true)
         if (token) {
+            setIsLoading(true)
             try {
                 const decodedToken: { user_id: string } = jwtDecode(token);
                 const id = decodedToken.user_id
@@ -27,12 +27,11 @@ const UserContextProvider = ({ children }: UserContextProviderPRops) => {
                 setIsLogin(true)
             } catch (error) {
                 console.log(error)
-            } finally {
-                setIsLoading(false)
             }
+            setIsLoading(false)
         }
     }, [isLogin])
-    
+
     return (
         <userContext.Provider value={{ isLogin, setIsLogin, user, setUser, isLoading }}>
             {children}
