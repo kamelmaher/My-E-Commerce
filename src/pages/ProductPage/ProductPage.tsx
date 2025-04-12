@@ -9,24 +9,25 @@ import Related from "./Related"
 
 const ProductPage = () => {
     const { productId } = useParams()
-    const product = useFetch<ProductType>(`https://dummyjson.com/products/${productId}`)
+    const { data, isLoading } = useFetch<ProductType>(`https://dummyjson.com/products/${productId}`)
+    console.log(data)
+    if (isLoading) return <Loading />
     return (
-        !product.isLoading ?
-            <Box>
-                <Stack
-                    direction={{
-                        xs: "column",
-                        md: "row"
-                    }}
-                    pt={3}
-                    pb={3}
-                    justifyContent={"center"}
-                >
-                    <ProductImages images={product.data!.images} />
-                    <ProductPageDesc product={product.data!} />
-                </Stack>
-                <Related category={product.data!.category} />
-            </Box> : <Loading />
+        <Box>
+            <Stack
+                direction={{
+                    xs: "column",
+                    md: "row"
+                }}
+                pt={3}
+                pb={3}
+                justifyContent={"center"}
+            >
+                <ProductImages images={data!.images} />
+                <ProductPageDesc product={data!} />
+            </Stack>
+            <Related category={data!.category} id={+productId!} />
+        </Box>
     )
 }
 

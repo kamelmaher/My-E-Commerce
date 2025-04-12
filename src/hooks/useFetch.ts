@@ -10,10 +10,10 @@ export const useFetch = <T>(url: string, loop?: boolean) => {
   const [data, setData] = useState<T>();
   const [isLoading, setIsLoading] = useState(true);
   const [err, setErr] = useState("");
-  const lastWord = url.split("/")[5];
-  const isGender = lastWord == "mens" || lastWord == "womens";
   useEffect(() => {
     setIsLoading(true);
+    const lastWord = url.split("/")[5];
+    const isGender = lastWord == "mens" || lastWord == "womens";
     if (isGender) {
       let allData: ProductType[] = [];
       categories.map((category) => {
@@ -47,7 +47,7 @@ export const useFetch = <T>(url: string, loop?: boolean) => {
       axios
         .get(url)
         .then(({ data }) => {
-          setData(() =>
+          setData(
             loop
               ? data.products.map((product: Root) => {
                   return {
