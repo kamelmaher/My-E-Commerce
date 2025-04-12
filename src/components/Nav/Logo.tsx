@@ -1,5 +1,5 @@
 import { Box } from "@mui/material"
-import LogoImage from "/logo.png"
+import LogoImage from "/logo.webp"
 import { NavLink } from "react-router-dom"
 
 const Logo = () => {

@@ -1,8 +1,8 @@
 import { SwiperSlide, Swiper } from "swiper/react"
-import product1 from "/banner_home1.png"
-import product2 from "/banner_home2.png"
+import product1 from "/banner_home1.webp"
+import product2 from "/banner_home2.webp"
 import Slide from "./Slide"
-import picture from "/banner_home3.png"
+import picture from "/banner_home3.webp"
 import { Box, Stack } from "@mui/material"
 const Slider = () => {
     return (

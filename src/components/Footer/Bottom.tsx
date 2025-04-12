@@ -1,5 +1,5 @@
 import { Box, Stack } from "@mui/material"
-import paymentMethods from "/payment_method.png"
+import paymentMethods from "/payment_method.webp"
 const Bottom = () => {
     return (
         <Stack

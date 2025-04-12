@@ -1,8 +1,8 @@
 import { Stack } from "@mui/material"
-import img1 from "/banner3_1.png"
-import img2 from "/banner3_2.png"
-import img3 from "/banner3_3.png"
-import img4 from "/banner3_4.png"
+import img1 from "/banner3_1.webp"
+import img2 from "/banner3_2.webp"
+import img3 from "/banner3_3.webp"
+import img4 from "/banner3_4.webp"
 import Section from "../Section"
 import HeroImage from "./HeroImage"
 const imgs = [img1, img2, img3, img4]
