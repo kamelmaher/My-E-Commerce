@@ -27,9 +27,8 @@ const UserContextProvider = ({ children }: UserContextProviderPRops) => {
                 getId(token).then(id => {
                     setFetchUserLoading(true)
                     getUser(id).then(() => {
-                        setIsLogin(true)
-                    }).finally(() => {
                         setFetchUserLoading(false)
+                        setIsLogin(true)
                     })
                 })
             } catch (error) {
