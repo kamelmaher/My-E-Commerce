@@ -9,7 +9,8 @@ import LoginIcon from '@mui/icons-material/Login';
 import { logOut } from "../../services/auth"
 import Loading from "../Loading"
 const Links = () => {
-    const { user, isLoading } = useUser()
+    const { user, isLogin, fetchUserLoading } = useUser()
+    console.log(fetchUserLoading)
     return (
         <Stack
             direction={"row"}
@@ -24,7 +25,7 @@ const Links = () => {
             <CategoriesButton />
             <NavBar />
             {
-                !isLoading ? <Stack direction={"row"} gap={2} order={{
+                !fetchUserLoading ? <Stack direction={"row"} gap={2} order={{
                     xs: 3,
                     sm: 2
                 }}
@@ -33,15 +34,16 @@ const Links = () => {
                     justifyContent={"center"}
                 >
                     {
-                        user.name ? <>
-                            <p>Hello {user.name}</p>
-                            <MyButton size={"small"} text="Log out" leftIcon={<LoginIcon />} handleClick={logOut} />
-                        </> : <Loading height="fit-content" />
+                        isLogin ?
+                            <>
+                                <p>Hello {user.name}</p>
+                                <MyButton size={"small"} text="Log out" leftIcon={<LoginIcon />} handleClick={logOut} />
+                            </> : <AuthButtons />
                     }
-                </Stack> : <AuthButtons />
+                </Stack> : <Loading height="fit-content" />
             }
             <HiddenMenu />
-        </Stack>
+        </Stack >
     )
 }
 
