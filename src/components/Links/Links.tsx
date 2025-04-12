@@ -10,7 +10,6 @@ import { logOut } from "../../services/auth"
 import Loading from "../Loading"
 const Links = () => {
     const { user, isLogin, fetchUserLoading } = useUser()
-    console.log(fetchUserLoading)
     return (
         <Stack
             direction={"row"}

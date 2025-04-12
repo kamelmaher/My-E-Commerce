@@ -8,6 +8,7 @@ type userContextType = {
   user: UserType;
   setUser: (e: UserType) => void;
   fetchUserLoading: boolean;
+  setFetchUserLoading: (e: boolean) => void;
 };
 export const userContext = createContext<userContextType>(
   {} as userContextType

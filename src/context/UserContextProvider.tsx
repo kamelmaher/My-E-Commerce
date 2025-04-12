@@ -11,37 +11,35 @@ const UserContextProvider = ({ children }: UserContextProviderPRops) => {
     const [isLogin, setIsLogin] = useState(false)
     const [fetchUserLoading, setFetchUserLoading] = useState(true)
     const [user, setUser] = useState<UserType>({} as UserType)
+
     const getUser = async (id: string) => {
         const { user } = await getUserFromDb(id)
         setUser({ ...user, id: id } as UserType)
     }
+
     const getId = async (token: string) => {
         const decodedToken: { user_id: string } = await jwtDecode(token);
         const id = decodedToken.user_id
         return id
     }
+
     useEffect(() => {
         const token = getCookie("authToken")
         if (token) {
-            try {
-                getId(token).then(id => {
-                    setFetchUserLoading(true)
-                    getUser(id).then(() => {
-                        setFetchUserLoading(false)
-                        setIsLogin(true)
-                    })
+            getId(token).then(id => {
+                getUser(id).then(() => {
+                    setIsLogin(true)
+                }).finally(() => {
+                    setFetchUserLoading(false)
                 })
-            } catch (error) {
-                console.log("Error fetching user:", error);
-            }
+            })
         } else {
             setFetchUserLoading(false)
         }
-
-    }, [])
+    }, [fetchUserLoading])
 
     return (
-        <userContext.Provider value={{ isLogin, setIsLogin, user, setUser, fetchUserLoading }}>
+        <userContext.Provider value={{ isLogin, setIsLogin, user, setUser, fetchUserLoading, setFetchUserLoading }}>
             {children}
         </userContext.Provider>
     )

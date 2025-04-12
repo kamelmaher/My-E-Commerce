@@ -3,16 +3,16 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { FormEvent, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import MyButton from "../../components/MyButton";
-import { useUser } from "../../hooks/useUser";
 import { LoginUser } from "../../services/auth";
 import { UserType } from "../../types/User";
+import { useUser } from "../../hooks/useUser";
 const inputs = ["email", "password"]
 const Login = () => {
     const [user, setUser] = useState<UserType>({} as UserType)
     const [result, setResult] = useState({ success: false, error: "" })
     const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate()
-    const { setIsLogin } = useUser()
+    const { setFetchUserLoading } = useUser()
     useEffect(() => {
         if (result.success) {
             toast.success("Welcome back!")
@@ -25,9 +25,7 @@ const Login = () => {
         e.preventDefault()
         const { loginError } = await LoginUser(user.email, user.password!, setIsLoading)
         setResult({ success: loginError ? false : true, error: loginError })
-        if (!loginError) {
-            setIsLogin(true)
-        }
+        if (!loginError) setFetchUserLoading(true)
     }
 
     return (
