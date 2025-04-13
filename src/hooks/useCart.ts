@@ -10,6 +10,7 @@ type cartContextType = {
   createCart: (userId: string) => void;
   checkInCart: (userId: string, productId: number) => boolean;
   removeFromCart: (productId: number, cartId: string) => void;
+  changeQuantity: (value: string, productId: number, userId: string) => void;
 };
 export const cartContext = createContext<cartContextType>(
   {} as cartContextType

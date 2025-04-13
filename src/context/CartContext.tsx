@@ -20,14 +20,14 @@ const CartContextProvider = ({ children }: CartContextProviderProps) => {
     const addToCart = (product: ProductType, userId: string) => {
         if (!userId) return navigate("/auth/login")
         if (checkInCart(userId, product.id)) return
-        const newCarts = carts.map(cart => cart.userId == userId ? { ...cart, products: [...cart.products, product] } : cart)
+        const newCarts = carts.map(cart => cart.userId == userId ? { ...cart, products: [...cart.products, { product: product, quantity: 1 }] } : cart)
         setCarts(newCarts)
         localStorage.setItem("carts", JSON.stringify(newCarts))
         toast.success("Added to cart! 🛒")
     }
 
     const removeFromCart = (productId: number, userId: string) => {
-        const newCarts = carts.map(cart => cart.cartId == userId ? { ...cart, products: cart.products.filter(product => product.id != productId) } : cart)
+        const newCarts = carts.map(cart => cart.cartId == userId ? { ...cart, products: cart.products.filter(product => product.product.id != productId) } : cart)
         setCarts(newCarts)
         localStorage.setItem("carts", JSON.stringify(newCarts))
     }
@@ -47,16 +47,23 @@ const CartContextProvider = ({ children }: CartContextProviderProps) => {
         let found = false
         carts.map(cart => {
             if (cart.cartId == userId)
-                cart.products.map(product => product.id == productId ? found = true : undefined)
+                cart.products.map(product => product.product.id == productId ? found = true : undefined)
         })
         return found
     }
 
+    const changeQuantity = (value: string, productId: number, userId: string) => {
+        const cart = carts.filter(cart => cart.userId == userId)[0]
+        const newProducts = cart.products.map(product => product.product.id == productId ? { ...product, quantity: value == "+" ? product.quantity + 1 : product.quantity > 0 ? product.quantity - 1 : 0 } : product)
+        const newCarts = carts.map(cart => cart.userId == userId ? { ...cart, products: newProducts } : cart)
+        setCarts(newCarts)
+        localStorage.setItem("carts", JSON.stringify(newCarts))
+    }
     useEffect(() => {
         loadCarts()
     }, [])
     return (
-        <cartContext.Provider value={{ carts, addToCart, getUserCart, createCart, checkInCart, removeFromCart }}>
+        <cartContext.Provider value={{ carts, addToCart, getUserCart, createCart, checkInCart, removeFromCart, changeQuantity }}>
             {children}
         </cartContext.Provider>
     )

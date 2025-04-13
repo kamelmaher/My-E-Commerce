@@ -8,6 +8,7 @@ import Login from './pages/Auth/Login'
 import Signup from './pages/Auth/Signup'
 import ProductPage from './pages/ProductPage/ProductPage'
 import MainLayout from './MainLayout'
+import { Cart } from './pages/Cart'
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -17,6 +18,7 @@ export const router = createBrowserRouter(
                 <Route path='category/:categoryName' element={<CategoryProducts />}></Route>
                 <Route path='products/:gender' element={<ProductsByGender />}></Route>
                 <Route path='product/:productId' element={<ProductPage />}></Route>
+                <Route path='cart/:userId' element={<Cart />}></Route>
             </Route>
             <Route path='/auth' element={<Auth />}>
                 <Route path='login' element={<Login />}></Route>

@@ -113,3 +113,23 @@
 }
 
 /* Auth */
+.css-bmnu5q-MuiTableCell-root {
+    font-size: 17px !important;
+    padding: 10px !important;
+}
+
+.css-bmnu5q-MuiTableCell-root,
+.price-label {
+    font-weight: 600 !important;
+    font-size: inherit !important;
+}
+
+.css-14y13q2-MuiTableCell-root,
+.css-1dc80h3-MuiTableCell-root {
+    padding: 10px !important;
+}
+
+.price-label {
+    min-width: 100px !important;
+}
+/* Cart */
