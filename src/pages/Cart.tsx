@@ -3,12 +3,19 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useCart } from "../hooks/useCart";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getTotal } from "../utils/getTotal";
+import { useUser } from "../hooks/useUser";
+import { useEffect } from "react";
 export const Cart = () => {
     const { getUserCart, changeQuantity, removeFromCart } = useCart()
     const { userId } = useParams()
     const cart = getUserCart(userId!)
+    const { isLogin } = useUser()
+    const navigate = useNavigate()
+    useEffect(() => {
+        if (!isLogin) navigate("/auth/login")
+    }, [])
     return (
         cart &&
         <Box mb={3}>
