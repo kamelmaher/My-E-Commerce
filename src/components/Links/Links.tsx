@@ -8,8 +8,10 @@ import MyButton from "../MyButton"
 import LoginIcon from '@mui/icons-material/Login';
 import { logOut } from "../../services/auth"
 import Loading from "../Loading"
+import { useNavigate } from "react-router-dom"
 const Links = () => {
     const { user, isLogin, fetchUserLoading } = useUser()
+    const navigate = useNavigate()
     return (
         <Stack
             direction={"row"}
@@ -36,7 +38,10 @@ const Links = () => {
                         isLogin ?
                             <>
                                 <p>Hello {user.name}</p>
-                                <MyButton size={"small"} text="Log out" leftIcon={<LoginIcon />} handleClick={logOut} />
+                                <MyButton size={"small"} text="Log out" leftIcon={<LoginIcon />} handleClick={() => {
+                                    navigate("/")
+                                    logOut()
+                                }} />
                             </> : <AuthButtons />
                     }
                 </Stack> : <Loading height="fit-content" />

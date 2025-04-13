@@ -5,18 +5,15 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useCart } from "../hooks/useCart";
 import { useNavigate, useParams } from "react-router-dom";
 import { getTotal } from "../utils/getTotal";
-import { useUser } from "../hooks/useUser";
 import { useEffect } from "react";
 export const Cart = () => {
     const { getUserCart, changeQuantity, removeFromCart } = useCart()
     const { userId } = useParams()
     const cart = getUserCart(userId!)
-    const { isLogin } = useUser()
     const navigate = useNavigate()
     useEffect(() => {
-        if (!isLogin) navigate("/auth/login")
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+        if (userId === "undefined") navigate("/auth/login")
+    }, [userId])
     return (
         cart &&
         <Box mb={3}>
