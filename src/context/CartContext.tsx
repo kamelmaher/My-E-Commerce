@@ -38,7 +38,7 @@ const CartContextProvider = ({ children }: CartContextProviderProps) => {
     const removeFromCart = (productId: number, userId: string) => {
         const newCarts = carts.map(cart => cart.cartId == userId ? { ...cart, products: cart.products.filter(product => product.product.id != productId) } : cart)
         setCarts(newCarts)
-        localStorage.setItem("carts", JSON.stringify(newCarts))
+        sendToDB(newCarts)
     }
 
     const getUserCart = (userId: string) => carts.filter(cart => cart.userId == userId)[0]
