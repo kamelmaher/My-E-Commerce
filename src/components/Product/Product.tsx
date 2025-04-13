@@ -4,7 +4,6 @@ import ProductRating from "./ProductRating"
 import ProductsDetails from "./ProductsDetails"
 import ProductControls from "./ProductControls"
 import ProductImg from "./ProductImg"
-import Animated from "../Animated"
 import { useCart } from "../../hooks/useCart"
 import { useUser } from "../../hooks/useUser"
 import { NavLink } from "react-router-dom"
@@ -26,27 +25,21 @@ const Product = ({ product, isRow }: ProductProps) => {
                     } :
                     "initial"
             }
+            borderRadius={2}
+            boxShadow={"0 2px 8px rgba(0, 0, 0, 0.08)"}
+            border={"1px solid var(--border-color)"}
+            padding={"13px"}
+            mb={2}
+            position={"relative"}
+            bgcolor={"white"}
         >
-            <Animated>
-                <Box
-                    borderRadius={2}
-                    boxShadow={"0 2px 8px rgba(0, 0, 0, 0.08)"}
-                    border={"1px solid var(--border-color)"}
-                    padding={"13px"}
-                    mb={2}
-                    position={"relative"}
-                    bgcolor={"white"}
-                >
-                    <NavLink to={`/product/${product.id}`}>
-                        <ProductImg img={product.main_img} name={product.name} />
-                        <ProductRating rating={product.rating} />
-                        <ProductsDetails name={product.name} price={product.price} desc={product.description} />
-                    </NavLink>
-                    <ProductControls addToCart={() => addToCart(product, user.id)} inCart={checkInCart(user.id, product.id)} />
-                </Box>
-            </Animated>
-
-        </Box>
+            <NavLink to={`/product/${product.id}`}>
+                <ProductImg img={product.main_img} name={product.name} />
+                <ProductRating rating={product.rating} />
+                <ProductsDetails name={product.name} price={product.price} desc={product.description} />
+            </NavLink>
+            <ProductControls addToCart={() => addToCart(product, user.id)} inCart={checkInCart(user.id, product.id)} />
+        </Box >
     )
 }
 

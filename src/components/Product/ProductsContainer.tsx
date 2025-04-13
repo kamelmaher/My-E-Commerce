@@ -11,6 +11,7 @@ import { Stack, Box } from "@mui/material";
 import { useRef } from "react";
 import Section from "../Section";
 import { ProductType } from "../../types/Product";
+import Animated from "../Animated";
 
 type ProductsContainerProps = {
     title: string
@@ -29,45 +30,47 @@ const ProductsContainer = ({ title, products }: ProductsContainerProps) => {
 
     return (
         <Section>
-            <Stack
-                direction={"row"}
-                justifyContent={"space-between"}
-                alignItems={"center"}
-                borderBottom={"3px solid var(--primary)"}
-                mb={2}
-            >
-                <Box>
-                    <MyButton size="medium" text={title} leftIcon={<LabelImportantIcon />} isTitle />
-                </Box>
-                <Stack direction={"row"} gap={2}>
-                    <ProductButton icon={<ChevronLeftIcon />} handleClick={handlePrev} />
-                    <ProductButton icon={<ChevronRightIcon />} handleClick={handleNext} />
+            <Animated>
+                <Stack
+                    direction={"row"}
+                    justifyContent={"space-between"}
+                    alignItems={"center"}
+                    borderBottom={"3px solid var(--primary)"}
+                    mb={2}
+                >
+                    <Box>
+                        <MyButton size="medium" text={title} leftIcon={<LabelImportantIcon />} isTitle />
+                    </Box>
+                    <Stack direction={"row"} gap={2}>
+                        <ProductButton icon={<ChevronLeftIcon />} handleClick={handlePrev} />
+                        <ProductButton icon={<ChevronRightIcon />} handleClick={handleNext} />
+                    </Stack>
                 </Stack>
-            </Stack>
-            <Swiper
-                modules={[Navigation]}
-                onSwiper={(swiper) => (swiperRef.current = swiper)}
-                spaceBetween={20}
-                slidesPerView={1}
-                loop={products.length > 4}
-                breakpoints={{
-                    640: {
-                        slidesPerView: 2,
-                    },
-                    768: {
-                        slidesPerView: 3,
-                    },
-                    1024: {
-                        slidesPerView: 4,
-                    },
-                }}
-            >
-                {
-                    products.map(product => <SwiperSlide key={product.id}>
-                        <Product product={product} />
-                    </SwiperSlide>)
-                }
-            </Swiper>
+                <Swiper
+                    modules={[Navigation]}
+                    onSwiper={(swiper) => (swiperRef.current = swiper)}
+                    spaceBetween={20}
+                    slidesPerView={1}
+                    loop={products.length > 4}
+                    breakpoints={{
+                        640: {
+                            slidesPerView: 2,
+                        },
+                        768: {
+                            slidesPerView: 3,
+                        },
+                        1024: {
+                            slidesPerView: 4,
+                        },
+                    }}
+                >
+                    {
+                        products.map(product => <SwiperSlide key={product.id}>
+                            <Product product={product} />
+                        </SwiperSlide>)
+                    }
+                </Swiper>
+            </Animated>
         </Section>
     )
 }

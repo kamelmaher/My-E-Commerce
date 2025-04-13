@@ -15,6 +15,7 @@ export const Cart = () => {
     const navigate = useNavigate()
     useEffect(() => {
         if (!isLogin) navigate("/auth/login")
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (
         cart &&
