@@ -1,5 +1,5 @@
 import { Box } from "@mui/material"
-import logo from "/white_logo.webp"
+import logo from "/white_logo.png"
 
 const FooterLogo = () => {
     return (
