@@ -14,6 +14,7 @@ const UserContextProvider = ({ children }: UserContextProviderPRops) => {
 
     const getUser = async (id: string) => {
         const { user } = await getUserFromDb(id)
+        console.log(user)
         setUser({ ...user, id: id } as UserType)
     }
 

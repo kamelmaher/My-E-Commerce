@@ -29,7 +29,6 @@ const CartContextProvider = ({ children }: CartContextProviderProps) => {
         if (!userId) return navigate("/auth/login")
         if (checkInCart(userId, product.id)) return
         const newCarts = carts.map(cart => cart.userId == userId ? { ...cart, products: [...cart.products, { product: product, quantity: 1 }] } : cart)
-        console.log(newCarts)
         setCarts(newCarts)
         sendToDB(newCarts).then(() =>
             toast.success("Added to cart! 🛒")
@@ -77,13 +76,12 @@ const CartContextProvider = ({ children }: CartContextProviderProps) => {
         const newProducts = cart.products.map(product => product.product.id == productId ? { ...product, quantity: value == "+" ? product.quantity + 1 : product.quantity > 0 ? product.quantity - 1 : 0 } : product)
         const newCarts = carts.map(cart => cart.userId == userId ? { ...cart, products: newProducts } : cart)
         setCarts(newCarts)
-        localStorage.setItem("carts", JSON.stringify(newCarts))
+        sendToDB(newCarts)
     }
 
     useEffect(() => {
         loadCarts().then(carts => {
             setCarts(carts.carts!.carts as CartType[] || [])
-            console.log(carts.carts!.carts)
         })
     }, [])
     return (
