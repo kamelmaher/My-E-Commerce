@@ -4,6 +4,8 @@ import { CartType } from "../types/CartType"
 import { ProductType } from "../types/Product"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
+import { setDoc, doc, getDoc } from "firebase/firestore"
+import { db } from "../firebase/firebase"
 type CartContextProviderProps = {
     children: ReactNode
 }
@@ -14,16 +16,24 @@ const CartContextProvider = ({ children }: CartContextProviderProps) => {
     const createCart = (userId: string) => {
         const newCarts = [...carts, { products: [], userId: userId, cartId: userId }]
         setCarts(newCarts)
-        localStorage.setItem("carts", JSON.stringify(newCarts))
+        sendToDB(newCarts)
     }
 
-    const addToCart = (product: ProductType, userId: string) => {
+    const sendToDB = async (carts: CartType[]) => {
+        await setDoc(doc(db, "carts", "mainCart"), {
+            carts
+        });
+    }
+
+    const addToCart = async (product: ProductType, userId: string) => {
         if (!userId) return navigate("/auth/login")
         if (checkInCart(userId, product.id)) return
         const newCarts = carts.map(cart => cart.userId == userId ? { ...cart, products: [...cart.products, { product: product, quantity: 1 }] } : cart)
+        console.log(newCarts)
         setCarts(newCarts)
-        localStorage.setItem("carts", JSON.stringify(newCarts))
-        toast.success("Added to cart! 🛒")
+        sendToDB(newCarts).then(() =>
+            toast.success("Added to cart! 🛒")
+        )
     }
 
     const removeFromCart = (productId: number, userId: string) => {
@@ -34,11 +44,21 @@ const CartContextProvider = ({ children }: CartContextProviderProps) => {
 
     const getUserCart = (userId: string) => carts.filter(cart => cart.userId == userId)[0]
 
-    const loadCarts = () => {
-        const data = localStorage.getItem("carts")
-        if (data) {
-            const parsedData = JSON.parse(data)
-            setCarts(parsedData)
+    const loadCarts = async () => {
+        try {
+            const cartsDocRef = doc(db, "carts", "mainCart");
+            const cartsDoc = await getDoc(cartsDocRef);
+            if (cartsDoc.exists()) {
+                const carts = cartsDoc.data();
+                return { carts, fetchCartsError: null };
+            } else {
+                const fetchcartsError = "User Not Found";
+                return { carts: null, fetchcartsError };
+            }
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error: any) {
+            const fetchCartsError = error.message;
+            return { carts: null, fetchCartsError };
         }
     }
 
@@ -59,8 +79,12 @@ const CartContextProvider = ({ children }: CartContextProviderProps) => {
         setCarts(newCarts)
         localStorage.setItem("carts", JSON.stringify(newCarts))
     }
+
     useEffect(() => {
-        loadCarts()
+        loadCarts().then(carts => {
+            setCarts(carts.carts!.carts as CartType[] || [])
+            console.log(carts.carts!.carts)
+        })
     }, [])
     return (
         <cartContext.Provider value={{ carts, addToCart, getUserCart, createCart, checkInCart, removeFromCart, changeQuantity }}>
