@@ -11,9 +11,15 @@ export const Cart = () => {
     const { userId } = useParams()
     const cart = getUserCart(userId!)
     const navigate = useNavigate()
+
     useEffect(() => {
         if (userId === "undefined") navigate("/auth/login")
     }, [userId])
+
+    useEffect(() => {
+        scrollTo(0, 0)
+    }, [])
+
     return (
         cart &&
         <Box mb={3}>
@@ -76,6 +82,6 @@ export const Cart = () => {
                         textAlign: "center"
                     }}>No Products in your Cart.</p>
             }
-        </Box >
+        </Box>
     );
 };

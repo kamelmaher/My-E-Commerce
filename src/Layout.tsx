@@ -6,7 +6,6 @@ import Links from "./components/Links/Links"
 const Layout = () => {
     return (
         <Box>
-
             <Box
                 padding={{
                     xs: "0 20px 10px",
